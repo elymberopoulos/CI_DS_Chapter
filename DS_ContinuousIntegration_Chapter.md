@@ -2,8 +2,6 @@
 
 What is continuous integration and why should you care? Continuous integration is the practice of routinely integrating code into the main branch of a repository. Testing of these integrations should be conducted as early as possible and often as possible [^Atlassian]. Automated testing is a key feature of conintuous integration. Automated tests with continuous integration help assure that your code is always in a working state. Verification of successfully building code is essential for continuous delivery and deployment to production code. This automated process allows for quick feedback on code and possible bugs. Manually testing and deploying takes significantly more time and by the time the manual testing might be done then more errors or bugs could be discovered allowing a sort of "build up" of problems [^Atlassian]. This chapter's objective will be to discuss various continuous integration tools like Travis CI, Circle CI and others. 
 
-<br/>
-
 ### Travis CI
 <img style="margin: 0;" src="images/travisCI/travisCI.png">
 
@@ -31,7 +29,33 @@ script: #Scripts that need to run in the Travis CI virtual environment
 
 <br/>
 
-Working with Travis CI through a project's .travis.yml file is very straightforward.
+Working with Travis CI through a project's .travis.yml file is very straightforward and offers a lot of configuration. Travis CI has the ability to clone to a certain depth within a repository. This would only be helpful if a user is performing git operations in their build [^Travis]. As seen in the examples below branches can be set that trigger Travis CI builds [^Travis].
+```yaml
+# blocklist - These branches will not trigger Travis CI builds
+branches:
+  except:
+  - legacy
+  - experimental
+
+# safelist - These branches will trigger Travis CI build
+branches:
+  only:
+  - master
+  - stable
+
+# The below yaml code triggers Travis CI builds on ALL branches in the repository
+branches:
+  only:
+  - gh-pages
+  - /.*/
+  
+# Travis CI also support *regular expressions*
+branches:
+  only:
+  - master
+  - /^deploy-.*$/
+```
+
 
 <br/>
 
