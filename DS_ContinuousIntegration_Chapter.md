@@ -55,7 +55,39 @@ branches:
   - master
   - /^deploy-.*$/
 ```
+Now that you know how to trigger a build it is time to learn about specifying what to build. One simple way is to specify scripts that Travis CI should run. However, if you have a large project in which you want to test multiple parallel jobs then the build matrix is what you need. "The build matrix combines a language-and-environment dependent set of configuration options to automatically create a matrix of all possible combinations" [^Travis]. There are a few key features that will allow you to get started with the matrix. The include option specifies which entries a user wants to build. One instance where this would be helpful if a user wanted to test a specific version of a dependency with a specific runtime environment [^Travis]. The exclude option does just what it says. Users have control over job exclusion based on language, environment, and other options. Lastly, failures are allowed to happen and not break the build if the user specifies which failures are tolerable. This allows for users to add experimental and preparatory builds to test against versions or configureations that are not ready to be officially supported [^Travis]. Below is an example from Travis CI's documentation.
+```yaml
+language: ruby
+rvm:
+- 1.9.3
+- 2.0.0
+- 2.1.0
+env:
+- DB=mongodb
+- DB=redis
+- DB=mysql
+gemfile:
+- Gemfile
+- gemfiles/rails4.gemfile
+- gemfiles/rails31.gemfile
+- gemfiles/rails32.gemfile
 
+matrix:
+  exclude:
+  - rvm: 2.0.0
+    gemfile: Gemfile
+    
+  include:
+  - rvm: 2.1.0
+    gemfile: gemfiles/rails32.gemfile
+    env: DB=mongodb
+    
+  allow_failures:
+  - rvm: 1.9.3
+  
+  fast_finish: true # allows for job to be marked as finished when all required jobs finish. 
+                    # The allow_failure jobs will continue to run.
+```
 
 <br/>
 
