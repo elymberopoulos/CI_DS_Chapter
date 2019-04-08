@@ -5,7 +5,11 @@ What is continuous integration and why should you care? Continuous integration i
 ### Travis CI
 <img style="margin: 0;" src="images/travisCI/travisCI.png">
 
-Travis CI is a very popular continuous integration tool and integrating it with a GitHub account is simple to do. On Travis-ci.com a user can sign up with their GitHub account. After a user confirms the authorization of Travis CI they will be able to select which repositories they want to use with Travis CI. A user then needs to add a .travis.yml file to root directory of their project to tell Travis CI what to do. While Travis CI support a wide range of languages the .travis.yml file below is an example for a Node.js project.
+Travis CI is a very popular continuous integration tool and integrating it with a GitHub account is simple to do. On Travis-ci.com a user can sign up with their GitHub account. After a user confirms the authorization of Travis CI they will be able to select which repositories they want to use with Travis CI. A user then needs to add a .travis.yml file to root directory of their project to tell Travis CI what to do. 
+
+<br/>
+
+Travis CI works by cloning a GitHub repository and carries out various build tasks to build and test code [^Travis]. If any of those tasks fail then the build is considered "broken", if they pass then the build is "passed". The build is "errored" and job stops immediately if a command in the before_install, install, or before_script phase returns a non-zero exit code [^Travis]. The build is "failed" if a command in the script phase returns a non-zero exit code [^Travis]. The job will run until it completes. Additionally, infrastructure environments can be specified based on what a project might need. Travis has Ubuntu Linux and macOS environments that run inside full virtual machines [^Travis]. Setting a specific environment would be something to investigate if a project was platform dependent, for example, a project written in Swift. While Travis CI support a wide range of languages the .travis.yml file below is an example for a Node.js project.
 ```yaml
 language: node_js #Specify the language of the project
 
@@ -19,7 +23,7 @@ branches:
   - master
   - stable
   
-before_script: #Install dependencies of the project before any run scripts for the virtual environment
+install: #Install dependencies of the project before any run scripts for the virtual environment
   - npm install
   
 script: #Scripts that need to run in the Travis CI virtual environment
@@ -88,10 +92,8 @@ matrix:
   fast_finish: true # allows for job to be marked as finished when all required jobs finish. 
                     # The allow_failure jobs will continue to run.
 ```
+Tavis CI also has the ability to use Docker in builds. Docker commands are issued in the before_install section of the .travis.yml file.
 
-<br/>
-
-Travis CI works by cloning a GitHub repository and carries out various build tasks to build and test code [^Travis]. If any of those tasks fail then the build is considered "broken", if they pass then the build is "passed". The build is "errored" and job stops immediately if a command in the before_install, install, or before_script phase returns a non-zero exit code [^Travis]. The build is "failed" if a command in the script phase returns a non-zero exit code [^Travis]. The job will run until it completes. Additionally, infrastructure environments can be specified based on what a project might need. Travis has Ubuntu Linux and macOS environments that run inside full virtual machines [^Travis]. Setting a specific environment would be something to investigate if a project was platform dependent, for example, a project written in Swift.
 
  
 
