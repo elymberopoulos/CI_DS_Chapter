@@ -92,8 +92,22 @@ matrix:
   fast_finish: true # allows for job to be marked as finished when all required jobs finish. 
                     # The allow_failure jobs will continue to run.
 ```
-Tavis CI also has the ability to use Docker in builds. Docker commands are issued in the before_install section of the .travis.yml file.
+Tavis CI also has the ability to use Docker in builds. Docker commands are issued in the before_install section of the .travis.yml file. Docker images can be used by either pulling them from a repository or a Docker image can be built from a Dockerfile [^Travis]. Docker Compose is available and installing newer Docker versions is also possible [^Travis]. Multi-image coordination and being able to test newer versions of Docker in virtual environments helps ensure that a product is always ready for deployment to production. Here is a sample from Travis CI's documentation.
+```yaml
+language: ruby
 
+services:
+  - docker
+
+before_install:
+  - docker build -t carlad/sinatra .
+  - docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
+  - docker ps -a
+  - docker run carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec rake test"
+
+script:
+  - bundle exec rake test
+```
 
  <br/>
  <br/>
