@@ -120,10 +120,11 @@ script:
  1.4.1 Using orbs section<br/>
  2 Reusing config<br/>
  2.1 authoring reuable commands, invoking those commands<br/>
- 2.1.1 Commands can use other commands in the scope of execution. For instance, if a command is declared inside your Orb it can use other commands in that orb. Commands parameters<br/>
+ 2.1.1 Commands can use other commands in the scope of execution. For instance, if a command is declared inside your Orb it can use other commands in that orb. Commands parameters. Command parameter types<br/>
  2.2 reuasable executors <br/>
  2.2.1 executor scope outside is still reusable for any jobs. Pass executors to specific jobs<br/>
  You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, foo-orb could define the bar executor. keys in jobs can override executor keys
+ 3 Briefly talk about creating orbs as an option and possible benefits of this. Too much documentation for this paper.
  
 
 References
