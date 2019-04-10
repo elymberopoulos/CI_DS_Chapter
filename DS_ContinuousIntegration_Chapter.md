@@ -113,11 +113,18 @@ script:
  <br/>
  ### Circle CI
  ##### outline
- 1.1 Initial setup (setup test containers, follow a project)
- 1.2 overview Orbs, Jobs, Steps, Workflow
- 1.3 workflow from configuration intro section
- 1.4 Orbs in depth (importing, authoring one, partner orbs)
- 1.4.1 Using orbs section
+ 1.1 Initial setup (setup test containers, follow a project)<br/>
+ 1.2 overview Orbs, Jobs, Steps, Workflow<br/>
+ 1.3 workflow from configuration intro section<br/>
+ 1.4 Orbs in depth (importing, authoring one, partner orbs)<br/>
+ 1.4.1 Using orbs section<br/>
+ 2 Reusing config<br/>
+ 2.1 authoring reuable commands, invoking those commands<br/>
+ 2.1.1 Commands can use other commands in the scope of execution. For instance, if a command is declared inside your Orb it can use other commands in that orb. Commands parameters<br/>
+ 2.2 reuasable executors <br/>
+ 2.2.1 executor scope outside is still reusable for any jobs. Pass executors to specific jobs<br/>
+ You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, foo-orb could define the bar executor. keys in jobs can override executor keys
+ 
 
 References
 
