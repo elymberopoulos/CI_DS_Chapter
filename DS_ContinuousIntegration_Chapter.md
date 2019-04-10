@@ -114,7 +114,10 @@ script:
  ### Circle CI
  ##### outline
  1.1 Initial setup (setup test containers, follow a project)
- * ORBS Orbs are packages of config that you can use to quickly get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify config across your projects. You may also want to use orbs as a refererence for config best practices. Refer to the CircleCI Orbs Registry for the complete list of available orbs.
+ 1.2 overview Orbs, Jobs, Steps, Workflow
+ 1.3 workflow from configuration intro section
+ 1.4 Orbs in depth (importing, authoring one, partner orbs)
+ 1.4.1 Using orbs section
 
 References
 
