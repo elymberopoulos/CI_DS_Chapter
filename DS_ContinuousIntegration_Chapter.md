@@ -124,7 +124,19 @@ script:
  2.2 reuasable executors <br/>
  2.2.1 executor scope outside is still reusable for any jobs. Pass executors to specific jobs<br/>
  You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, foo-orb could define the bar executor. keys in jobs can override executor keys
- 3 Briefly talk about creating orbs as an option and possible benefits of this. Too much documentation for this paper.
+ 3 Briefly talk about creating orbs as an option and possible benefits of this. Too much documentation for this paper.<br/>
+ POSSIBLY REARRANGE FOR BETTER FLOW <br/>
+ Projects section<br/>
+ 4 GitHub and Bitbucket Integration<br/>
+ 4.1When you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
+*A deploy key that is used to check out your project from GitHub or Bitbucket.
+*A service hook that is used to notify CircleCI when you push to GitHub or Bitbucket.<br/>
+CircleCI builds push hooks by default. So, builds are triggered for all push and PR hooks for the repository. The hooks can be edited to restrict what is built.<br/>
+4.2 The big push. First time a push is made with a .circleci/config.yml directory and file. CircleCI checks out the repository code and runs jobs and configured tests. Every time CircleCI runs a build it is always in a clean container. If multiple repositories are necessary for a build then deploy keys will need to be included in the config.yml file for each repository and a GitHub user key will also need to be included. User keys can be included from a project's Project Settings tab by selecting Checkout SSH keys. This SSH key should be kept private or only shared with trusted users.<br/>
+4.2.1 Authorizing other contributors to work with CircleCI. Creating a machine user which is a user that is created for running automated tests. Using the SSH key of this machine user allows anyone with repository access to build, test, and deploy the project. If a user wants read permission for CircleCI then all that is needed is that user's email address. However, to aquire write permissions, deploy keys and service hooks must be added to a repo. Additionally, a list of a user's repos must be aquired and an SSH key must be added to a user's account.<br/>
+4.2.2 There has been a lot of talk about keys but what are they? A deploy key is a repo-specific SSH hey. Its purpose is to give CircleCI access to a single repository. Deploy keys are read-only which keeps them from pushing to a repository, however, this can be changed with a user key if desired. User keys are SSH keys that are specific to each user. A user's VCS has the public key and CircleCI has the private key. The private key never leaves the CircleCI system because possession of that key gives the ability to act as that user. Detailed instructions on how to generate keys and include them in a project's config.yml file can be found on CircleCI's site.
+
+ 
  
 
 References
