@@ -112,6 +112,33 @@ script:
  <br/>
  <br/>
  ### Circle CI
+ 
+CircleCI is another popular continuous integration tool that is used by developers. It allows for seamless integration with both GitHub and Bitbucket. Getting started is as easy as creating a new account on CircleCI by signing up with your GitHub account. In the dashboard area of CircleCI users have the option to add a repository as a new project on CircleCI. Then users can proceed to configure and build their project on CircleCI. CircleCI offers a lot of functionality and flexability which is configured in a project's .circleci/config.yml directory and file.
+ <br/>
+There are various parts of a config.yml file that allow for customizable builds. Jobs in the config.yml file are comprised of various steps and each job runs in its own container [^Circle]. Steps are the basic commands that get executed in a job. Jobs can be run using a specific executor which is a specified environment in which jobs will be run [^Circle]. A few notable executors are docker, machine, or macos. Various options will need to be specified under executor environments, for example, a docker image [^Circle]. Defining a specified executor allows for it to be used across multiple different jobs in your .config.yml file. Properly testing a large project might require a large .config.yml file and take a long time to complete. With CircleCI it is possible to specify numerous jobs that need to be run and run them in parallel to save time [^Circle]. In the example below from Circle CI's documentation you can see that seperate jobs are constructed and they are specified to run under the workflow section of the file.
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+ 
  ##### outline
  1.1 Initial setup (setup test containers, follow a project)<br/>
  1.2 overview Orbs, Jobs, Steps, Workflow<br/>
@@ -125,7 +152,9 @@ script:
  2.2.1 executor scope outside is still reusable for any jobs. Pass executors to specific jobs<br/>
  You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, foo-orb could define the bar executor. keys in jobs can override executor keys
  3 Briefly talk about creating orbs as an option and possible benefits of this. Too much documentation for this paper.<br/>
+ 
  POSSIBLY REARRANGE FOR BETTER FLOW <br/>
+ 
  Projects section<br/>
  4 GitHub and Bitbucket Integration<br/>
  4.1When you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
@@ -146,3 +175,6 @@ References
 [^Atlassian]: Atlassian. “Continuous Integration, Explained.” Atlassian, Atlassian, www.atlassian.com/continuous-delivery/continuous-integration.
 <br/>
 [^Travis]: “Travis.” Travis CI Docs, docs.travis-ci.com/.
+<br/>
+[^Circle]: “Welcome to CircleCI Documentation.” CircleCI, circleci.com/docs/.
+
