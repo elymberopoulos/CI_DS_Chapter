@@ -138,6 +138,7 @@ workflows:
       - build
       - test
 ```
+Creating your own jobs, executors and other elements may not be necessary. CircleCI allows for projects to import premade configuration packages called Orbs [^Circle]. Importing an Orb is as simple as specifying the Orb key in your config file and then including which Orbs you would like to use.
  
  ##### outline
  1.1 Initial setup (setup test containers, follow a project)<br/>
