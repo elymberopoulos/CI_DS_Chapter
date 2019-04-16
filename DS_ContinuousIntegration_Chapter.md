@@ -164,6 +164,11 @@ jobs:
           to: "Lev"
 ```
 Once the project config.yml file is configured to test the code whichever way is deemed fit a developer should look into configuring deployment options for Circle CI. A vast amount of services are able to be deployed to with Circle CI. Some of these include: Amazon Web Services, Azure, Firebase, Google Cloud, Heroku and more [^Circle]. While the deployment steps vary for each platform there will typically be an Orb that can make the process easier for users. Snapcraft is also an option for deployment on Linux distributions. Everything necessary for generating a .snap file can be done in the config.yml file. There are also other options for distribution such as Artifactory.
+
+<br/>
+
+#### Summary
+Travis and Circle CI were covered in this chapter because they are a few of the most prevalent continuous integration tools. There are many more conitnuous integration tools available to developers if neither Travis or Circle CI meet a project's needs. For example, ThoughtWorks or Jenkins to name just a couple. The ability to test the code of a project against any environment in which code might be deployed is too powerful to ignore.
  
  ##### outline
  1.1 Initial setup (setup test containers, follow a project)<br/>
