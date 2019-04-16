@@ -2,8 +2,8 @@
 
 What is continuous integration and why should you care? Continuous integration is the practice of routinely integrating code into the main branch of a repository. Testing of these integrations should be conducted as early as possible and often as possible [^Atlassian]. Automated testing is a key feature of conintuous integration. Automated tests with continuous integration help assure that your code is always in a working state. Verification of successfully building code is essential for continuous delivery and deployment to production code. This automated process allows for quick feedback on code and possible bugs. Manually testing and deploying takes significantly more time and by the time the manual testing might be done then more errors or bugs could be discovered allowing a sort of "build up" of problems [^Atlassian]. This chapter's objective will be to discuss various continuous integration tools like Travis CI, Circle CI and others. 
 
-### Travis CI
-<img style="margin: 0;" src="images/travisCI/travisCI.png">
+#### Travis CI
+ <img style="margin: 0;" src="images/travisCI/travisCI.png">
 
 Travis CI is a very popular continuous integration tool and integrating it with a GitHub account is simple to do. On Travis-ci.com a user can sign up with their GitHub account. After a user confirms the authorization of Travis CI they will be able to select which repositories they want to use with Travis CI. A user then needs to add a .travis.yml file to root directory of their project to tell Travis CI what to do. 
 
@@ -108,13 +108,16 @@ before_install:
 script:
   - bundle exec rake test
 ```
+Continuous deployment is another powerful feature of Travis CI. Currently, Travis CI supports deployment to 39 providers [^Travis]. A few of these include Heroku, Google Firebase, Snap Store, NPM, PYPI, and many more. Multiple providers can be deployed to by specifying the provider name under the deploy key with the necessary credentials [^Travis]. Additionally, deployment conditionals can be specified with the on key. This will ensure that deployment only occurs when a specific condition it met. One example might be a specific branch specification.
 
  <br/>
  <br/>
- ### Circle CI
+ #### Circle CI
  
-CircleCI is another popular continuous integration tool that is used by developers. It allows for seamless integration with both GitHub and Bitbucket. Getting started is as easy as creating a new account on CircleCI by signing up with your GitHub account. In the dashboard area of CircleCI users have the option to add a repository as a new project on CircleCI. Then users can proceed to configure and build their project on CircleCI. CircleCI offers a lot of functionality and flexability which is configured in a project's .circleci/config.yml directory and file.
+CircleCI is another popular continuous integration tool that is used by developers. It allows for seamless integration with both GitHub and Bitbucket. Getting started is as easy as creating a new account on CircleCI by signing up with your GitHub account. In the dashboard area of CircleCI users have the option to add a repository as a new project on CircleCI. When a project is added to Circle CI a deploy key is added to the repository from either GitHub or Bitbucket setting, this key is used to check out your project from a repository. A service hook is also added to notify Circle CI when a push is made to the repository. CircleCI builds push hooks by default. So, builds are triggered for all push and PR hooks for the repository. The hooks can be edited to restrict what is built. It is up to the user to configure how their project is built. CircleCI offers a lot of functionality and flexability which is configured in a project's .circleci/config.yml directory and file.
+
  <br/>
+ 
 There are various parts of a config.yml file that allow for customizable builds. Jobs in the config.yml file are comprised of various steps and each job runs in its own container [^Circle]. Steps are the basic commands that get executed in a job. Jobs can be run using a specific executor which is a specified environment in which jobs will be run [^Circle]. A few notable executors are docker, machine, or macos. Various options will need to be specified under executor environments, for example, a docker image [^Circle]. Defining a specified executor allows for it to be used across multiple different jobs in your .config.yml file. Properly testing a large project might require a large .config.yml file and take a long time to complete. With CircleCI it is possible to specify numerous jobs that need to be run and run them in parallel to save time [^Circle]. In the example below from Circle CI's documentation you can see that seperate jobs are constructed and they are specified to run under the workflow section of the file.
 ```yaml
 version: 2
@@ -138,7 +141,29 @@ workflows:
       - build
       - test
 ```
-Creating your own jobs, executors and other elements may not be necessary. CircleCI allows for projects to import premade configuration packages called Orbs [^Circle]. Importing an Orb is as simple as specifying the Orb key in your config file and then including which Orbs you would like to use.
+Creating your own jobs, executors and other elements may not be necessary. CircleCI allows for projects to import premade configuration packages called Orbs [^Circle]. Importing an Orb is as simple as specifying the Orb key in your config file and then including which Orbs you would like to use. A project can utilize third-party Orbs but a project admin must opt-in for this option [^Circle]. Orbs allow for a standardization of configurations across multiple projects. Orbs are also comprised of three main elements: Commands, Jobs, and Executors [^Circle]. Commands are reusable steps that can be invoked with parameters within an existing job. Below is an example of how to write and invoke a command from an orb from Circle CI's documentation.
+```yaml
+# Commands are not restricted to belonging to Orbs
+version: 2.1
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
+
+jobs:
+  myjob:
+    docker:
+      - image: "circleci/node:9.6.1"
+    steps:
+      - myorb/sayhello:
+          to: "Lev"
+```
+Once the project config.yml file is configured to test the code whichever way is deemed fit a developer should look into configuring deployment options for Circle CI. A vast amount of services are able to be deployed to with Circle CI. Some of these include: Amazon Web Services, Azure, Firebase, Google Cloud, Heroku and more [^Circle]. While the deployment steps vary for each platform there will typically be an Orb that can make the process easier for users. Snapcraft is also an option for deployment on Linux distributions. Everything necessary for generating a .snap file can be done in the config.yml file. There are also other options for distribution such as Artifactory.
  
  ##### outline
  1.1 Initial setup (setup test containers, follow a project)<br/>
