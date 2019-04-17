@@ -3,7 +3,6 @@
 What is continuous integration and why should you care? Continuous integration is the practice of routinely integrating code into the main branch of a repository. Testing of these integrations should be conducted as early as possible and often as possible [^Atlassian]. Automated testing is a key feature of continuous integration. Automated tests with continuous integration help assure that your code is always in a working state. Verification of successfully building code is essential for continuous delivery and deployment to production code. This automated process allows for quick feedback on code and possible bugs. Manually testing and deploying takes significantly more time and by the time the manual testing might be done then more errors or bugs could be discovered allowing a sort of "build up" of problems [^Atlassian]. This chapter's objective will be to discuss a couple of continuous integration tools like Travis CI and Circle CI.
 
 ## Travis CI
- <img style="margin: 0;" src="images/travisCI/travisCI.png">
 
 Travis CI is a very popular continuous integration tool and integrating it with a GitHub account is simple to do. On Travis-ci.com a user can sign up with their GitHub account. After a user confirms the authorization of Travis CI they will be able to select which repositories they want to use with Travis CI. A user then needs to add a .travis.yml file to the root directory of their project to tell Travis CI what to do. 
 
