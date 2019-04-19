@@ -4,7 +4,7 @@ What is continuous integration and why should you care? Continuous integration i
 
 ## Travis CI
 
-Travis CI is a very popular continuous integration tool and integrating it with a GitHub account is simple to do. On Travis-ci.com a user can sign up with their GitHub account. After a user confirms the authorization of Travis CI they will be able to select which repositories they want to use with Travis CI. A user then needs to add a .travis.yml file to the root directory of their project to tell Travis CI what to do. 
+Travis CI is a popular continuous integration tool and integrating it with a GitHub account is simple. On Travis-ci.com a user can sign up with their GitHub account. After a user confirms the authorization of Travis CI they will be able to select which repositories they want to use with Travis CI. A user then needs to add a .travis.yml file to the root directory of their project to tell Travis CI what to do. 
 
 #### Build Status and Environments
 
@@ -62,7 +62,7 @@ branches:
 
 #### Scripts and Build Matrices
 
-Now that you know how to trigger a build it is time to learn about specifying what to build. One simple way is to specify scripts that Travis CI should run. However, if you have a large project in which you want to test multiple parallel jobs then the build matrix is what you need. "The build matrix combines a language-and-environment dependent set of configuration options to automatically create a matrix of all possible combinations" [^Travis]. There are a few key features that will allow you to get started with the matrix. The include option specifies which entries a user wants to build. One instance where this would be helpful if a user wanted to test a specific version of a dependency with a specific runtime environment [^Travis]. The exclude option does just what it says. Users have control over job exclusion based on language, environment, and other options. Lastly, failures are allowed to happen and not break the build if the user specifies which failures are tolerable. This allows for users to add experimental and preparatory builds to test against versions or configureations that are not ready to be officially supported [^Travis]. Below is an example from Travis CI's documentation.
+Now that you know how to trigger a build, it is time to learn about specifying what to build. One simple way is to specify scripts that Travis CI should run. However, if you have a large project in which you want to test multiple parallel jobs then the build matrix is what you need. "The build matrix combines a language-and-environment dependent set of configuration options to automatically create a matrix of all possible combinations" [^Travis]. There are a few key features that will allow you to get started with the matrix. The include option specifies which entries a user wants to build. One instance where this would be helpful if a user wanted to test a specific version of a dependency with a specific runtime environment [^Travis]. The exclude option does just what it says. Users have control over job exclusion based on language, environment, and other options. Lastly, failures are allowed to happen and not break the build if the user specifies which failures are tolerable. This allows for users to add experimental and preparatory builds to test against versions or configureations that are not ready to be officially supported [^Travis]. Below is an example from Travis CI's documentation.
 ```yaml
 language: ruby
 rvm:
@@ -151,7 +151,7 @@ workflows:
 
 #### Orbs
 
-Creating your own jobs, executors and other elements may not be necessary. CircleCI allows for projects to import premade configuration packages called Orbs [^Circle]. Importing an Orb is as simple as specifying the Orb key in your config file and then including which Orbs you would like to use. A project can utilize third-party Orbs but a project admin must opt-in for this option [^Circle]. Orbs allow for a standardization of configurations across multiple projects. Orbs are also comprised of three main elements: Commands, Jobs, and Executors [^Circle]. Commands are reusable steps that can be invoked with parameters within an existing job. Below is an example of how to write and invoke a command from an orb from Circle CI's documentation.
+Creating your own jobs, executors, and other elements may not be necessary. CircleCI allows for projects to import premade configuration packages called Orbs [^Circle]. Importing an Orb is as simple as specifying the Orb key in your config file and then including which Orbs you would like to use. A project can utilize third-party Orbs but a project admin must opt-in for this option [^Circle]. Orbs allow for a standardization of configurations across multiple projects. Orbs are also comprised of three main elements: Commands, Jobs, and Executors [^Circle]. Commands are reusable steps that can be invoked with parameters within an existing job. Below is an example of how to write and invoke a command from an orb from Circle CI's documentation.
 
 ```yaml
 # Commands are not restricted to belonging to Orbs
@@ -177,7 +177,7 @@ jobs:
 
 #### Deploying Projects
 
-Once the project config.yml file is configured to test the code whichever way is deemed fit a developer should look into configuring deployment options for Circle CI. A vast amount of services are able to be deployed to with Circle CI. Some of these include: Amazon Web Services, Azure, Firebase, Google Cloud, Heroku, and more [^Circle]. While the deployment steps vary for each platform there will typically be an Orb that can make the process easier for users. Snapcraft is also an option for deployment on Linux distributions. Everything necessary for generating a .snap file can be done in the config.yml file. There are also other options for distribution such as Artifactory.
+Once the project config.yml file is configured to test the code whichever way is deemed fit, a developer should look into configuring deployment options for Circle CI. A vast amount of services are able to be deployed to with Circle CI. Some of these include: Amazon Web Services, Azure, Firebase, Google Cloud, and Heroku [^Circle]. While the deployment steps vary for each platform, there will typically be an Orb that can make the process easier for users. Snapcraft is also an option for deployment on Linux distributions. Everything necessary for generating a .snap file can be done in the config.yml file. There are also other options for distribution such as Artifactory.
 
 #### Summary
 
